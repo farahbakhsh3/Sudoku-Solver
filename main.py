@@ -4,17 +4,16 @@ Created on Tue Dec 12 17:02:23 2023
 
 @author: Amin
 """
+
 import numpy as np
 
 
 class Sudoku:
-
     def __init__(self, board):
-        assert type(board) == type(np.array([])), "Board should be (numpy.ndarray)."
-        assert board.shape==(9,9), "Board size should be (9 x 9)."
-        assert board.dtype==int, "Board date shuld be integer."
+        assert isinstance(board, np.ndarray), "Board should be ndarray."
+        assert board.shape == (9, 9), "Board size should be (9 x 9)."
+        assert board.dtype == int, "Board date shuld be integer."
         self.board = board
-    
 
     def draw(self):
         print("|" + "-"*23 + "|")
@@ -36,7 +35,6 @@ class Sudoku:
         
         return -1, -1
 
-    
     def isValidMove(self, num, row, col):
         for c in range(9):
             if self.board[row, c] == num:
@@ -51,10 +49,8 @@ class Sudoku:
         for r in range(3):
             for c in range(3):
                 if self.board[top + r, left + c] == num:
-                    return False
-        
+                    return False        
         return True
-        
     
     def solveBorad(self):
         row, col = self.findFirstFreePlace()
@@ -62,13 +58,13 @@ class Sudoku:
             return True
 
         for num in range(1, 10):
-                if self.isValidMove(num, row, col):
-                    self.board[row, col] = num
-                    if self.solveBorad():
-                        return True
-                    self.board[row, col] = 0
-                    
+            if self.isValidMove(num, row, col):
+                self.board[row, col] = num
+                if self.solveBorad():
+                    return True
+                self.board[row, col] = 0                    
         return False
+
 
 if __name__ == "__main__":
     board = [[3, 4, 5, 0, 7, 0, 0, 0, 0,],
@@ -86,4 +82,3 @@ if __name__ == "__main__":
         sudoku.draw()
     else:
         print("There is no solution for this sudoku table. :(")
-    

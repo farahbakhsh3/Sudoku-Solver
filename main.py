@@ -49,9 +49,9 @@ class Sudoku:
         for r in range(3):
             for c in range(3):
                 if self.board[top + r, left + c] == num:
-                    return False        
+                    return False
         return True
-    
+
     def solveBorad(self):
         row, col = self.findFirstFreePlace()
         if row == -1 or col == -1:

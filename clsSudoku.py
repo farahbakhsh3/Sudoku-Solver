@@ -35,11 +35,11 @@ class Sudoku:
         for c in range(9):
             if self.board[row, c] == num:
                 return False
-        
+
         for r in range(9):
             if self.board[r, col] == num:
                 return False
-        
+
         top = row // 3 * 3
         left = col // 3 * 3
         for r in range(3):
@@ -48,15 +48,15 @@ class Sudoku:
                     return False
         return True
 
-    def solveBorad(self):
+    def solveBoard(self):
         row, col = self.findFirstFreePlace()
         if row == -1 or col == -1:
             return True
-        
+
         for num in self.list_1to9:
             if self.isValidMove(num, row, col):
                 self.board[row, col] = num
-                if self.solveBorad():
+                if self.solveBoard():
                     return True
-                self.board[row, col] = 0                    
+                self.board[row, col] = 0
         return False
